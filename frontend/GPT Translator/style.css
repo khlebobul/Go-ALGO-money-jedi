@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #F2F2F0;
+  font-family: 'Montserrat';
+}
+
+h1 {
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-color: #fff;
+}
+
+  button {
+    padding: 10px 20px;
+    background-color: #D9F05F;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+  }
+
+  button:hover {
+    background-color: #e7f3ab;
+  }
+
+  #translatedText {
+    margin-top: 10px;
+    font-weight: bold;
+  }
