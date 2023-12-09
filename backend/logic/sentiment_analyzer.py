@@ -1,9 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import  LinearRegression
 import pandas as pd
-import googletrans
 
-translator = googletrans.Translator()
 data = None
 model = None
 tfidf_vectorizer = TfidfVectorizer(max_features=5000)

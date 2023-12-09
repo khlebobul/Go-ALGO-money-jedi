@@ -8,4 +8,5 @@ from django.conf import settings
 
 urlpatterns = [
     path('api/news/<str:ticker>', views.getNews),
+    path('api/graph/<str:ticker>', views.getGraphData)
 ]
