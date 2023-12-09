@@ -40,7 +40,7 @@ sber = Ticker('SBER')
 stocks = Market('stocks')
 
 # Sber candles.
-s_stock_data = pd.DataFrame(sber.candles(date='2011-11-17', till_date='today', period='1h'))
+s_stock_data = pd.DataFrame(sber.candles(date='2021-11-17', till_date='today', period='1h'))
 
 #print(s_stock_data.tail())
 
