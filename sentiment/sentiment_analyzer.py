@@ -1,7 +1,5 @@
-from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import  LinearRegression
-from sklearn.metrics import mean_squared_error
 import pandas as pd
 import googletrans
 
@@ -20,14 +18,9 @@ def initialize():
 # Train model
 def train():
     global model
-    train, test = train_test_split(data, test_size=0.1, random_state=42)
-
     tfidf_vectorizer.fit(data['title'])
-
     model = LinearRegression()
-    model.fit(tfidf_vectorizer.transform(train['title']), train['score'])
-
-    print(mean_squared_error(test['score'], model.predict(tfidf_vectorizer.transform(test['title']))))
+    model.fit(tfidf_vectorizer.transform(data['title']), data['score'])
 
 
 # Make prediction
