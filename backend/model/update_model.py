@@ -2,10 +2,10 @@ from moexalgo import Market, Ticker
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-#import tensorflow as tf
-from tensorflow.keras import layers
+import tensorflow as tf
 import keras
-from tensorflow.keras.models import Model
+from keras import layers
+from keras.models import Model
 import matplotlib.pyplot as plt
 
 # Function that splits the dataset into 2 based on the given time step.
@@ -75,4 +75,4 @@ close_model_v1.compile(loss='mean_squared_error', optimizer='adam')
 close_model_v1.fit(X, y, batch_size=64, epochs=100, verbose=1)
 
 # Save the model.
-close_model_v1.save('close_model_v1.keras')
+close_model_v1.save('backend/home/close_model_v1.keras')
