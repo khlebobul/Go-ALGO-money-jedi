@@ -1,7 +1,7 @@
 # [Хакатон GO ALGO ]([url](https://goalgo.ru/)https://goalgo.ru/)
 
 
-### Usage [Explain Like I'm Five]([url](https://www.reddit.com/r/explainlikeimfive/))
+### Usage [Explain Like I'm Five]([[url](https://www.reddit.com/r/explainlikeimfive/)]
 
 ```javascript
 
