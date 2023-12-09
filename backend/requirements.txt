@@ -1,6 +1,3 @@
-tpulse~=0.1.9
-nltk~=3.8.1
-googletrans==4.0.0rc1
 requests~=2.31.0
 beautifulsoup4~=4.11.1
 pandas~=1.4.3

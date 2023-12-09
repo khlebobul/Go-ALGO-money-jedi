@@ -16,9 +16,13 @@ init_news()
 
 @api_view(['GET'])
 def getNews(request, ticker="MOEX"):
-    response = dict()
-    for i in news_parser.get_last_news_by_ticker(ticker):
-        response[i] = sentiment_analyzer.sentimental_analyze(i)
+    response = list()
+    news, sources = news_parser.get_last_news_by_ticker(ticker)
+    for i in range(len(news)):
+        response.append([])
+        response[-1].append(news[i])
+        response[-1].append(sources[i])
+        response[-1].append(sentiment_analyzer.sentimental_analyze(news[i]))
     return Response(response)
 
 @api_view(['GET'])
