@@ -65,85 +65,85 @@ def generate_timeslots(input_time, num_slots):
     # Return the timeslots as a pandas Series
     return pd.Series(timeslots, name='end')
 
-# Sber ticker.
-sber = Ticker('SBER')
+def generate_predictions(ticker, number_of_hours_predicted):
+    # Ticker.
+    sber = Ticker(ticker)
 
-# Import all stocks.
-stocks = Market('stocks')
+    # Import all stocks.
+    stocks = Market('stocks')
 
-# Sber candles.
-s_stock_data = pd.DataFrame(sber.candles(date='2021-11-17', till_date='2023-09-11', period='1h'))
+    # Sber candles.
+    s_stock_data = pd.DataFrame(sber.candles(date='2021-11-17', till_date='2023-09-11', period='1h'))
 
-#print(s_stock_data.tail())
+    #print(s_stock_data.tail())
 
-# Check if there is any missing data.
-if len(s_stock_data.isna().sum().unique()) > 1:
-    print("Missing data found.")
-    exit(0)
+    # Check if there is any missing data.
+    if len(s_stock_data.isna().sum().unique()) > 1:
+        print("Missing data found.")
+        exit(0)
 
-# Define a "target" series that contains "close" column from the dataset.
-# Time - closing time of the candle.
-target = s_stock_data['close']
-close_time = s_stock_data['end']
+    # Define a "target" series that contains "close" column from the dataset.
+    # Time - closing time of the candle.
+    target = s_stock_data['close']
+    close_time = s_stock_data['end']
 
-# Variable that decides how many hours do we want account.
-number_of_hours = 100
+    # Variable that decides how many hours do we want account.
+    number_of_hours = 100
 
-# Scale the variables.
-min_max_scaler = MinMaxScaler()
-target_scaled = min_max_scaler.fit_transform(np.array(target).reshape(-1, 1))
+    # Scale the variables.
+    min_max_scaler = MinMaxScaler()
+    target_scaled = min_max_scaler.fit_transform(np.array(target).reshape(-1, 1))
 
-# Split data into training and test sets.
-X, y = create_dataset_with_timesteps(target_scaled, number_of_hours)
+    # Split data into training and test sets.
+    X, y = create_dataset_with_timesteps(target_scaled, number_of_hours)
 
-# Save the model.
-close_model_v1 = keras.models.load_model('close_model_v1.keras')
+    # Save the model.
+    close_model_v1 = keras.models.load_model('close_model_v1.keras')
 
 
-# Define the number of hours for prediction.
-number_of_hours_predicted = 5
+    # "number_of_hours_predicted" cannot exceed "number_of_hours".
+    if number_of_hours_predicted > number_of_hours:
+        print("Number of predicted days cannot exceed number of days used for prediction.")
 
-# "number_of_hours_predicted" cannot exceed "number_of_hours".
-if number_of_hours_predicted > number_of_hours:
-    print("Number of predicted days cannot exceed number of days used for prediction.")
+    # Generate predictions for the next "number_of_hours_predicted" hours.
+    X_old = X[-1]
+    for i in range(number_of_hours_predicted):
+        
+        # Define X_new.
+        X_new = X_old
+        
+        # Generate y_new.
+        y_new = close_model_v1.predict(X_new.reshape(-1, 100, 1))
+        
+        X_old = np.append(X_old[-99:], y_new)
 
-# Generate predictions for the next "number_of_hours_predicted" hours.
-X_old = X[-1]
-for i in range(number_of_hours_predicted):
+    # Scale back the result.
+    target_final = pd.Series(min_max_scaler.inverse_transform(X_old[-1 * number_of_hours_predicted:].reshape(-1, 1)).reshape(-1, ), name='close')
+
+    # Form a Dataframe that contains predicted price.
+    time_slot = str(close_time[-1:].values[0]).split('T')[0] + ' ' + str(close_time[-1:].values[0]).split('T')[1].split('.')[0]
+
+    predicted_timeslots = generate_timeslots(time_slot, number_of_hours_predicted + 1)[1:].reset_index()
+
+    predicted_df = pd.concat([predicted_timeslots, target_final.apply(lambda x: round(x, 2))], axis=1).drop(columns=['index'], axis=1)
+
+
+
+    #
+    # This is our predictions.
+    #
+    #print(predicted_df)
+
+
+
+    # Create an original df.
+    original_df = pd.concat([close_time, target], axis=1)[-5:].reset_index().drop(columns=['index'], axis=1)
+
+
+
+    #
+    # This is the real prices.
+    #
+    #print(original_df)
     
-    # Define X_new.
-    X_new = X_old
-    
-    # Generate y_new.
-    y_new = close_model_v1.predict(X_new.reshape(-1, 100, 1))
-    
-    X_old = np.append(X_old[-99:], y_new)
-
-# Scale back the result.
-target_final = pd.Series(min_max_scaler.inverse_transform(X_old[-1 * number_of_hours_predicted:].reshape(-1, 1)).reshape(-1, ), name='close')
-
-# Form a Dataframe that contains predicted price.
-time_slot = str(close_time[-1:].values[0]).split('T')[0] + ' ' + str(close_time[-1:].values[0]).split('T')[1].split('.')[0]
-
-predicted_timeslots = generate_timeslots(time_slot, number_of_hours_predicted + 1)[1:].reset_index()
-
-predicted_df = pd.concat([predicted_timeslots, target_final.apply(lambda x: round(x, 2))], axis=1).drop(columns=['index'], axis=1)
-
-
-
-#
-# This is our predictions.
-#
-print(predicted_df)
-
-
-
-# Create an original df.
-original_df = pd.concat([close_time, target], axis=1)[-5:].reset_index().drop(columns=['index'], axis=1)
-
-
-
-#
-# This is the real prices.
-#
-print(original_df)
+    return original_df, predicted_df
