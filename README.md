@@ -1,4 +1,4 @@
-# [Хакатон GO ALGO ]([url](https://goalgo.ru/)https://goalgo.ru/)
+# [Хакатон GO ALGO ]([url](https://goalgo.ru/)https://goalgo.ru/) | Команда Денежные джедаи
 
 ### Идея проекта
 
