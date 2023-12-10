@@ -24,7 +24,7 @@
 5. Генерируются предсказания на следующие X часов;
 6. На основе сгенерированных данных генерируется график, позволяя видеть потенциальный тренд актива.
 
-### Usage [Explain Like I'm Five](https://www.reddit.com/r/explainlikeimfive/)
+### Usage "Переводчик" [Explain Like I'm Five](https://www.reddit.com/r/explainlikeimfive/)
 
 ```javascript
 
