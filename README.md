@@ -24,6 +24,14 @@
 5. Генерируются предсказания на следующие X часов;
 6. На основе сгенерированных данных генерируется график, позволяя видеть потенциальный тренд актива.
 
+Главный компонент нашей модели - Long Short-Term Memory layer
+![image 2](https://github.com/khlebobul/Go-ALGO-money-jedi/assets/77191581/62eef136-3625-418b-aec5-161645e41d5a)
+
+### Статистика исходов
+![image 3](https://github.com/khlebobul/Go-ALGO-money-jedi/assets/77191581/0a6af973-bbe9-453f-a3e0-690a0f1ba428)
+
+
+
 ### Usage "Переводчик" [Explain Like I'm Five](https://www.reddit.com/r/explainlikeimfive/)
 
 ```javascript
