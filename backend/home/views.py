@@ -38,7 +38,6 @@ def getNews(request, ticker):
 
 @api_view(['GET'])
 def getGraphData(request, ticker, hours):
-    response = dict()
     df1 = DataFrame()
     df2 = DataFrame()
     df1, df2 = main.generate_predictions(ticker, hours)
@@ -58,8 +57,10 @@ def getGraphData(request, ticker, hours):
     for amount in close2:
         close.append(amount)
 
-    response = dict()
-    for i in range(len(end)):
-        response[end[i]] = close[i]
-
-    return Response(json.dumps(response))
+    ref = db.reference("сhart/")
+    json_object = dict()
+    json_object[ticker] = dict()
+    json_object[ticker]['timestamp'] = end
+    json_object[ticker]['amount'] = close
+    ref.update(json_object)
+    return Response("Done")

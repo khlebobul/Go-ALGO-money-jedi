@@ -34,7 +34,7 @@ def define_LSTM_model_v1(number_of_lstm_units, input_shape):
     return Model(inputs=input_layer, outputs=output_layer)
 
 # Sber ticker.
-sber = Ticker('SBER')
+sber = Ticker('MOEX')
 
 # Import all stocks.
 stocks = Market('stocks')
@@ -75,4 +75,4 @@ close_model_v1.compile(loss='mean_squared_error', optimizer='adam')
 close_model_v1.fit(X, y, batch_size=64, epochs=100, verbose=1)
 
 # Save the model.
-close_model_v1.save('backend/home/close_model_v1.keras')
+close_model_v1.save('/Users/timurzeksimbaev/Desktop/Go-ALGO/backend/home/close_model_MOEX.keras')
