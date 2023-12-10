@@ -3,6 +3,11 @@ from rest_framework.decorators import api_view
 from logic import news_parser, sentiment_analyzer
 from model import main
 from pandas import DataFrame
+import json
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
 
 def init_news():
     sentiment_analyzer.initialize()
@@ -11,19 +16,25 @@ def init_news():
 
 init_news()
 
+# Init data base
+cred = credentials.Certificate("goalgo-1170e-firebase-adminsdk-q2p4c-61dace46e1.json")
+firebase_admin = firebase_admin.initialize_app(cred,
+                                               {"databaseURL": "https://goalgo-1170e-default-rtdb.firebaseio.com/"})
+
 
 # Create your views here.
-
-@api_view(['GET'])
-def getNews(request, ticker="MOEX"):
-    response = list()
+@api_view(['Get'])
+def getNews(request, ticker):
+    ref = db.reference("news/")
     news, sources = news_parser.get_last_news_by_ticker(ticker)
-    for i in range(len(news)):
-        response.append([])
-        response[-1].append(news[i])
-        response[-1].append(sources[i])
-        response[-1].append(sentiment_analyzer.sentimental_analyze(news[i]))
-    return Response(response)
+    json_object = dict()
+    json_object[ticker] = dict()
+    json_object[ticker]["title"] = news
+    json_object[ticker]["source"] = sources
+    json_object[ticker]["sentiment"] = [json.dumps(sentiment_analyzer.sentimental_analyze(j)) for j in news]
+    ref.set(json_object)
+    return Response("Done")
+
 
 @api_view(['GET'])
 def getGraphData(request, ticker, hours):
@@ -51,4 +62,4 @@ def getGraphData(request, ticker, hours):
     for i in range(len(end)):
         response[end[i]] = close[i]
 
-    return Response(response)
+    return Response(json.dumps(response))
