@@ -2,6 +2,7 @@ import os
 #tf_enable_onednn = os.environ.get("TF_ENABLE_ONEDNN_OPTS")
 #tf_enable_onednn = 0
 
+from django.conf import settings
 from moexalgo import Market, Ticker
 import numpy as np
 import pandas as pd
@@ -98,7 +99,7 @@ def generate_predictions(ticker, number_of_hours_predicted):
     X, y = create_dataset_with_timesteps(target_scaled, number_of_hours)
 
     # Save the model.
-    close_model_v1 = keras.models.load_model('close_model_v1.keras')
+    close_model_v1 = keras.models.load_model(str(settings.BASE_DIR)+'/home/close_model_'+ticker+'.keras')
 
 
     # "number_of_hours_predicted" cannot exceed "number_of_hours".

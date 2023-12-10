@@ -2,11 +2,11 @@ from moexalgo import Market, Ticker
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-import tensorflow as tf
+
 import keras
 from keras import layers
 from keras.models import Model
-import matplotlib.pyplot as plt
+
 
 # Function that splits the dataset into 2 based on the given time step.
 def create_dataset_with_timesteps(data, time_step=60):
@@ -34,13 +34,13 @@ def define_LSTM_model_v1(number_of_lstm_units, input_shape):
     return Model(inputs=input_layer, outputs=output_layer)
 
 # Sber ticker.
-sber = Ticker('MOEX')
+sber = Ticker('GAZP')
 
 # Import all stocks.
 stocks = Market('stocks')
 
 # Sber candles.
-s_stock_data = pd.DataFrame(sber.candles(date='2021-11-17', till_date='today', period='1h'))
+s_stock_data = pd.DataFrame(sber.candles(date='2022-01-01', till_date='today', period='1h'))
 
 #print(s_stock_data.tail())
 
@@ -75,4 +75,4 @@ close_model_v1.compile(loss='mean_squared_error', optimizer='adam')
 close_model_v1.fit(X, y, batch_size=64, epochs=100, verbose=1)
 
 # Save the model.
-close_model_v1.save('/Users/timurzeksimbaev/Desktop/Go-ALGO/backend/home/close_model_MOEX.keras')
+close_model_v1.save('C:/Users/amirc/Desktop/code/pythonProject/Go-ALGO/backend/home/close_model_GAZP.keras')

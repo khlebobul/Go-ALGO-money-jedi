@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="path/to/lightweight-charts.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="company">
+            <span class="company__title title">Компании</span>
+            <ul class="company__list">
+                <li id="GAZP" class="company__list__item">
+                    <div class="company__list__item__left">
+                        <img class="company__list__item__left__img" src="img/gazp.png" alt="icon">
+                        <div class="company__list__item__left__text">
+                            <span class="bold">Газпром</span>
+                            <br>
+                            <span class="thin">GAZP</span>
+                        </div>
+                    </div>
+                        <div class="company__list__item__right__cost">
+                        <span class="bold">100 ₽</span>
+                        <br>
+                        <span class="thin">+0 %</span>
+                    </div>
+                </li>
+                <li id="SBER" class="company__list__item">
+                    <div class="company__list__item__left">
+                        <img class="company__list__item__left__img" src="img/sber.png" alt="icon">
+                        <div class="company__list__item__left__text">
+                            <span class="bold">Сбер</span>
+                            <br>
+                            <span class="thin">SBER</span>
+                        </div>
+                    </div>
+                        <div class="company__list__item__right__cost">
+                        <span class="bold">100 ₽</span>
+                        <br>
+                        <span class="thin">+0 %</span>
+                    </div>
+                </li>
+                <li id="MOEX" class="company__list__item">
+                    <div class="company__list__item__left">
+                        <img class="company__list__item__left__img" src="img/moex.png" alt="icon">
+                        <div class="company__list__item__left__text">
+                            <span class="bold">Московская биржа</span>
+                            <br>
+                            <span class="thin">MOEX</span>
+                        </div>
+                    </div>
+                        <div class="company__list__item__right__cost">
+                        <span class="bold">100 ₽</span>
+                        <br>
+                        <span class="thin">+0 %</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="center">
+            <div class="center__chart">
+                <canvas class="item" id="myChartGAZP" style="width:100%;max-width:700px"></canvas>
+                <canvas class="item" id="myChartMOEX" style="width:100%;max-width:700px"></canvas>
+                <canvas class="item" id="myChartSBER" style="width:100%;max-width:700px"></canvas>
+            </div>
+            <div class="center__news">
+                <span class="center__news__title title">Новости</span>
+                <ul class="center__news__list">
+
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="right__profile">
+                <span class="right__profile__title">Профиль</span>
+                <div class="right__profile__name">
+                    <img src="/img/Rectangle 6.png" alt="icon" class="right__profile__name__img">
+                    <span class="right__profile__name__text">Иванов Иван</span>
+                </div>
+                <span class="right__profile__balance">Баланс: 10000 ₽ </span>
+            </div>
+            <div class="right__investors">
+                <span class="right__investors__title">Инвесторы</span>
+                <ul class="right__investors__list">
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔔</span>
+                    </li>
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔕</span>
+                    </li>
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔔</span>
+                    </li>
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔔</span>
+                    </li>
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔔</span>
+                    </li>
+                    <li class="right__investors__list__item">
+                        <div class="right__investors__list__item__left">
+                            <img src="/img/Rectangle 6.png" alt="Icon" class="right__investors__list__item__left__img">
+                            <span class="right__investors__list__item__left__text">Иванов Иван</span>
+
+                        </div>
+                        <span class="right__investors__list__item__indicator">🔔</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="translator-open">
+        <img src="img/translate.svg" alt="translate">
+    </div>
+    <div class="translator">
+        <div class="translator__window">
+            <img src="/img/close.svg" alt="close" class="translator__window__close">
+            <span class="translator__window__title">Переводчик с "трейдерского" на русский</span>
+
+            <textarea class="translator__window__textarea" placeholder="Введите текст для перевода" id="englishText" rows="4" cols="50"></textarea>
+            <button class="translator__window__button">Перевести</button>
+        
+            <h2 class="translator__window__translated-title">Перевод</h2>
+            <div class="translator__window__translated-text"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/script.js"></script>
+</body>
+</html>

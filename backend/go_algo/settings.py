@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 ROOT_URLCONF = 'go_algo.urls'
-
+STATIC_URL = "home/static/"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

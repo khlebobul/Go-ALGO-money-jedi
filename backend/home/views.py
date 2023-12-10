@@ -7,6 +7,7 @@ import json
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+from django.http import HttpResponse
 
 
 def init_news():
@@ -20,6 +21,10 @@ init_news()
 cred = credentials.Certificate("goalgo-1170e-firebase-adminsdk-q2p4c-61dace46e1.json")
 firebase_admin = firebase_admin.initialize_app(cred,
                                                {"databaseURL": "https://goalgo-1170e-default-rtdb.firebaseio.com/"})
+
+
+def index(requset):
+    return HttpResponse()
 
 
 # Create your views here.
