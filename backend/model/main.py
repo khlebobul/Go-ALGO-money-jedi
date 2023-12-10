@@ -6,12 +6,11 @@ from moexalgo import Market, Ticker
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-import tensorflow as tf
+#import tensorflow as tf
+from tensorflow.keras import layers
 import keras
-from keras import layers
-from keras.models import Model
+from tensorflow.keras.models import Model
 import matplotlib.pyplot as plt
-
 
 # Function that splits the dataset into 2 based on the given time step.
 def create_dataset_with_timesteps(data, time_step=60):
@@ -74,7 +73,7 @@ def generate_predictions(ticker, number_of_hours_predicted):
     stocks = Market('stocks')
 
     # Sber candles.
-    s_stock_data = pd.DataFrame(sber.candles(date='2021-11-17', till_date='today', period='1h'))
+    s_stock_data = pd.DataFrame(sber.candles(date='2022-01-10', till_date='today', period='1h'))
 
     #print(s_stock_data.tail())
 
@@ -99,8 +98,7 @@ def generate_predictions(ticker, number_of_hours_predicted):
     X, y = create_dataset_with_timesteps(target_scaled, number_of_hours)
 
     # Save the model.
-    # close_model_v1 = keras.models.load_model('../home/close_model_v1.keras')
-    close_model_v1 = keras.models.load_model('/Users/timurzeksimbaev/Desktop/Go-ALGO/backend/home/close_model_MOEX.keras')
+    close_model_v1 = keras.models.load_model('close_model_v1.keras')
 
 
     # "number_of_hours_predicted" cannot exceed "number_of_hours".
@@ -149,4 +147,3 @@ def generate_predictions(ticker, number_of_hours_predicted):
     #print(original_df)
     
     return original_df, predicted_df
-
