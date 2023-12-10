@@ -32,7 +32,7 @@ def getNews(request, ticker):
     json_object[ticker]["title"] = news
     json_object[ticker]["source"] = sources
     json_object[ticker]["sentiment"] = [json.dumps(sentiment_analyzer.sentimental_analyze(j)) for j in news]
-    ref.set(json_object)
+    ref.update(json_object)
     return Response("Done")
 
 
