@@ -7,9 +7,9 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 #import tensorflow as tf
-from tensorflow.keras import layers
 import keras
-from tensorflow.keras.models import Model
+from keras.models import Model
+from keras import layers
 import matplotlib.pyplot as plt
 
 # Function that splits the dataset into 2 based on the given time step.
